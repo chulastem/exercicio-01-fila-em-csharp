@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
+
 namespace fila;
 public class Program
 {
@@ -22,7 +23,7 @@ public class Program
                 TempoAtendimento = new Random().Next(1, 6)
             };
             filaEspera.Enqueue(cliente);
-            Console.WriteLine($"Cliente {i} entrou na fila de espera.");
+            Console.WriteLine($"{DateTime.Now} | Cliente {i} entrou na fila de espera.");
         }
         //Criando uma lista de funcionários para realizar o atendimento.
         //Ultiliza-se a LISTA 
@@ -41,15 +42,15 @@ public class Program
                 {
                     Cliente cliente = filaEspera.Dequeue();
                     funcionarios[i].Ocupado = true;
-                    Console.WriteLine($"\nAtendendo Cliente {cliente.Numero}...");
+                    Console.WriteLine($"\n{DateTime.Now} | Atendendo Cliente {cliente.Numero}...");
                     Thread.Sleep(cliente.TempoAtendimento * 1000);
-                    Console.WriteLine($"Cliente {cliente.Numero} atendido pelo funcionário: {funcionarios[i].Numero} com o tempo de {cliente.TempoAtendimento} segundos.");
+                    Console.WriteLine($"{DateTime.Now} | Cliente {cliente.Numero} atendido pelo funcionário: {funcionarios[i].Numero} com o tempo de {cliente.TempoAtendimento} segundos.");
                     funcionarios[i].Ocupado = false;
                 }
                 
             }
         }
-        Console.WriteLine("\nTodos os clientes foram atendidos.");
+        Console.WriteLine($"\n{DateTime.Now} |Todos os clientes foram atendidos.");
         Console.ReadLine();
     }
 }
